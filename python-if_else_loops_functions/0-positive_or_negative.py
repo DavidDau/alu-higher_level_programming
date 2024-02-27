@@ -5,5 +5,7 @@ if number > 0:
     print( f"{number} is possible")
 elif number ==0:
     print( f"{number} is zero")
-else:
+elif number < 0:
     print( f"{number} is negative")
+else:
+    print("Wrong type")
