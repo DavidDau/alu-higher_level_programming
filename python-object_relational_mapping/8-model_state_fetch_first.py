@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """first state"""
-
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -23,14 +22,15 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=eng)
     session = Session()
 
-    # Query the first state from the 'states' table, ordered by ID
-    first_state = session.query(State).order_by(State.id).first()
+    # Query the state with the least ID from the 'states' table
+    least_id_state = session.query(State).order_by(State.id).first()
 
-    # Print the state ID and name (if a state exists)
-    if first_state is not None:
-        print("{}: {}".format(first_state.id, first_state.name))
+    # Print the state ID (if a state exists)
+    if least_id_state is not None:
+        print("{}".format(least_id_state.id))
     else:
         print("Nothing")
 
     # Close the session
     session.close()
+
