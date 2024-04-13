@@ -1,24 +1,17 @@
 #!/usr/bin/python3
-"""Gets all the states"""
+"""Get all states"""
 
 
-import sys
 import MySQLdb
-
+from sys import argv
 
 if __name__ == "__main__":
-    my_connect = MySQLdb.connect(
-            user=sys.argv[1],
-            password=sys.argv[2],
-            db=sys.argv[3],
-            host="localhost",
-            port=3306
-        )
-
-    my_cursor = my_connect.cursor()
-    my_cursor.execute("SELECT * FROM states ORDER BY id ASC")
-    result = my_cursor.fetchall()
-
-    for i in result:
-        print(i)
-    my_connect.close()3
+    db = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                         passwd=argv[2], db=argv[3], charset="utf8")
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM states ORDER BY id ASC")
+    my_list = cursor.fetchall()
+    for j in my_list:
+        print(j)
+    cursor.close()
+    db.close()
