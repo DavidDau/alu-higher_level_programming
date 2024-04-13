@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Gets all the states"""
+
+
 import sys
 import MySQLdb
 
