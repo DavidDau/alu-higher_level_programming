@@ -1,7 +1,8 @@
 #!/usr/bin/python3 
+"""Get em all"""
+import sys
 import MySQLdb
 """Module"""
-import sys
 
 
 def list_states(username, password, database_name):
