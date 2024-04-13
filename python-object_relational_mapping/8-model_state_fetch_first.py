@@ -1,26 +1,36 @@
 #!/usr/bin/python3
-"""Prints the first state objects from the database hbtn_0e_6_usa."""
+"""first state"""
 
-import sys
-from model_state import Base, State
-from sqlalchemy.orm import Session
+import sqlalchemy
 from sqlalchemy import create_engine
-
+from sqlalchemy.orm import sessionmaker
+from sys import argv
+from model_state import Base, State
 
 if __name__ == "__main__":
-    my_engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}".format(
-        sys.argv[1], sys.argv[2], sys.argv[3]),
-        pool_pre_ping=True)
+    # Create a database engine using the provided credentials
+    eng = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(argv[1],
+                                                                    argv[2],
+                                                                    argv[3]))
 
-    Base.metadata.create_all(my_engine)
+    """
+    Create the necessary database tables
+    (if they don't exist) based on the defined models
+    """
+    Base.metadata.create_all(eng)
 
-    my_session = Session(my_engine)
+    # Create a session to interact with the database
+    Session = sessionmaker(bind=eng)
+    session = Session()
 
-    state = my_session.query(State).first()
+    # Query the first state from the 'states' table, ordered by ID
+    first_state = session.query(State).order_by(State.id).first()
 
-    if state:
-        print("{}: {}".format(state.__dict__["id"], state.__dict__["name"]))
+    # Print the state ID and name (if a state exists)
+    if first_state is not None:
+        print("{}: {}".format(first_state.id, first_state.name))
     else:
         print("Nothing")
 
-    my_session.close()
+    # Close the session
+    session.close()
