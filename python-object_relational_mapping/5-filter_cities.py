@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""cities by states"""
+"""all cities by state"""
 
 import MySQLdb
 from sys import argv
@@ -10,19 +10,16 @@ if __name__ == "__main__":
                          passwd=argv[2], db=argv[3], charset="utf8")
     cursor = db.cursor()
 
-    """
-    Execute an SQL query to retrieve data
-    from the 'cities' and 'states' tables
-    """
-    cursor.execute("SELECT cities.id, cities.name, states.name FROM cities \
-    JOIN states ON cities.state_id = states.id ORDER BY cities.id")
+    # Execute an SQL query to retrieve city names based on the state name
+    cursor.execute("SELECT cities.name FROM cities \
+    JOIN states ON cities.state_id = states.id WHERE states.name LIKE %s \
+    ORDER BY cities.id", (argv[4],))
 
     # Fetch all the results from the executed query
     my_list = cursor.fetchall()
 
-    # Iterate through the results and print each row
-    for j in my_list:
-        print(j)
+    # Print the city names separated by commas
+    print(", ".join(city[0] for city in my_list))
 
     # Close the cursor and database connection
     cursor.close()
