@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ORM"""
-
 from sqlalchemy import Column, Integer, String, create_engine
 """SQLalchemy"""
 from sqlalchemy.ext.declarative import declarative_base
@@ -15,7 +14,6 @@ class State(Base):
 
 # Define engine to connect to MySQL server
 engine = create_engine('mysql://username:password@localhost:3306/database')
-
 
 if __name__ == "__main__":
     # Create all tables in the database
