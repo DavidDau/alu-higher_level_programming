@@ -10,8 +10,6 @@ class State(Base):
     __tablename__ = 'states'
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     name = Column(String(128), nullable=False)
-
-# Define engine to connect to MySQL server
 engine = create_engine('mysql://username:password@localhost:3306/database')
 
 if __name__ == "__main__":
