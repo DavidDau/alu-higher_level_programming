@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     my_session = Session()
 
-    states = my_session.query(State).order_by(State.id).all()
+    states = my_session.query(State).order_by(State.id).ASC()
 
     for state in states:
         print("{}: {}".format(state.id, state.name))
