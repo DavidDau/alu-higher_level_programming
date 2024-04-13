@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """ORM"""
-from sqlalchemy import Column, Integer, String, create_engine
+import sqlalchemy
 """SQLalchemy"""
-from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
