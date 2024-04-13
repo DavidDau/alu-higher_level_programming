@@ -1,7 +1,10 @@
 #1/usr/bin/python3
+"""Listall states"""
+
 
 import MySQLdb
 import sys
+
 
 def list_states(username, password, database_name):
     # Connect to MySQL server
