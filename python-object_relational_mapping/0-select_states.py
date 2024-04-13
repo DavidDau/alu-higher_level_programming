@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Listall states"""
 
-
 import MySQLdb
 """Module"""
 import sys
@@ -35,6 +34,7 @@ def list_states(username, password, database_name):
         print("Error connecting to MySQL:", e)
         sys.exit(1)
 
+
 if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage: python script.py <username> <password> <database>")
@@ -45,4 +45,3 @@ if __name__ == "__main__":
     database_name = sys.argv[3]
 
     list_states(username, password, database_name)
-
