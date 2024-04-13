@@ -1,5 +1,6 @@
 #!/usr/bin/python3 
 """Get em all"""
+
 import sys
 import MySQLdb
 """Module"""
