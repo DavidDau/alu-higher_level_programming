@@ -1,25 +1,37 @@
 #!/usr/bin/python3
-"""List all state objects from the database hbtn_0e_6_usa."""
+"""Lists all states objects from the db"""
 
 import sys
-from model_state import Base, State
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
+
+def list_states(username, password, database_name):
+    # Create engine
+    engine = create_engine(f'mysql://{username}:{password}@localhost:3306/{database_name}')
+    
+    # Create session
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    
+    # Query for State objects, sorted by id
+    states = session.query(State).order_by(State.id).all()
+    
+    # Display results
+    for state in states:
+        print(f"{state.id}: {state.name}")
 
 if __name__ == "__main__":
-    my_engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}".format(
-        sys.argv[1], sys.argv[2], sys.argv[3]),
-        pool_pre_ping=True)
+    if len(sys.argv) != 4:
+        print("Usage: python script.py <username> <password> <database>")
+        sys.exit(1)
+    
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database_name = sys.argv[3]
 
-    Session = sessionmaker(bind=my_engine)
-    Base.metadata.create_all(my_engine)
-
-    my_session = Session()
-
-    states = my_session.query(State).order_by(State.id).ASC()
-
-    for state in states:
-        print("{}: {}".format(state.id, state.name))
-
-    my_session.close()
+    from model_state import Base  # Importing Base here as per requirement
+    from model_state import State  # Importing State here as per requirement
+    
+    list_states(username, password, database_name)
