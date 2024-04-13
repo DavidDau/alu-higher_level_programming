@@ -1,8 +1,9 @@
-#1/usr/bin/python3
+#!/usr/bin/python3
 """Listall states"""
 
 
 import MySQLdb
+"""Module"""
 import sys
 
 
