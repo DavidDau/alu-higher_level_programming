@@ -1,5 +1,6 @@
 #!/usr/bin/node
 class Rectangle {
-  // Empty class definition
+  width = 3;
+  height = 3;
 }
 module.exports = Rectangle;
